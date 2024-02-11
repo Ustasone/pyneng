@@ -30,3 +30,27 @@ Out[1]: '11111111111111111111111111110000'
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 """
+subnet_string = input('Введите подсеть в формате Х.Х.Х.Х/Х: ')
+subnet_and_mask_list = subnet_string.split('/')
+subnet_list = subnet_and_mask_list[0].split('.')
+mask_str = '1' * int(subnet_and_mask_list[1]) + '0' * (32 - int(subnet_and_mask_list[1]))
+mask_list = [int(mask_str[0:8], 2), int(mask_str[8:16], 2), int(mask_str[16:24], 2), int(mask_str[24:32], 2)]
+subnet_template = """
+Network:
+{0:<8}  {1:<8}  {2:<8}  {3:<8} 
+{0:08b}  {1:08b}  {2:08b}  {3:08b} 
+Mask:
+/{4:}
+{5:<8}  {6:<8}  {7:<8}  {8:<8}
+{5:08b}  {6:08b}  {7:08b}  {8:08b}
+"""
+
+print(subnet_template.format(int(subnet_list[0]), \
+int(subnet_list[1]), \
+int(subnet_list[2]), \
+int(subnet_list[3]), \
+subnet_and_mask_list[1], \
+mask_list[0], \
+mask_list[1], \
+mask_list[2], \
+mask_list[3]))
